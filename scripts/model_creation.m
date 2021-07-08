@@ -2,19 +2,18 @@ clc
 clear
 
 %% Topological Map for Solar Farm Scenario
-adjacency_matrix = [0  17  0  0   0   0;
-                    17 0   11 25  0   0;
-                    0  11  0  0   0   0;
-                    0  25  0  0   0   29;
-                    0  0   0  0   0   16;
-                    0  0   0  29  16  0];
+adjacency_matrix = [0  17  0  0   0;
+                    17 0   11 25  0;
+                    0  11  0  0   0;
+                    0  25  0  0   29;
+                    0  0   0  29  0];
  
-topological_map = digraph(adjacency_matrix, {'panel1' 'panel2' 'panel3' 'center' 'panel4' 'panel5'}, 'omitselfloops');
+topological_map = digraph(adjacency_matrix, {'panel1' 'panel2' 'panel3' 'center' 'panel4'}, 'omitselfloops');
 plot(topological_map)
 
 %% Importing Models from GreatSPN
 
-PNPRO_path = 'video_GSPNR.PNPRO';
+PNPRO_path = 'cpr_solarfarm.PNPRO';
 [nGSPN, GSPN_list] = ImportfromGreatSPN(PNPRO_path);
 
 LocationsModel  = GSPN_list.heterogeneous_team;
@@ -73,9 +72,7 @@ for n_index = 1:nNodes
             solarfarm = MergeGSPNR(solarfarm, charging);
         end
         if battery_level == "B1"
-            charging = copy(ChargingModel);
-            charging.format([node_name, battery_level, "B2"]);
-            solarfarm = MergeGSPNR(solarfarm, charging);
+            continue;
         end
         if battery_level == "B2"
             continue;

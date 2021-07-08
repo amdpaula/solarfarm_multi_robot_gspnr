@@ -60,10 +60,10 @@
     <nodes>
       <transition label-x="-5.0" label-y="0.0" name="Inspect_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="26.85" y="7.0"/>
       <place label-x="-5.5" label-y="0.0" name="Inspecting_&lt;1&gt;_&lt;2&gt;" x="26.0" y="12.0"/>
-      <transition delay="0.2" delay-x="1.5" delay-y="0.0" label-x="-7.0" label-y="0.0" name="FinishedInspect_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="26.55" y="19.0"/>
+      <transition delay="0.0111" delay-x="1.5" delay-y="0.0" label-x="-7.0" label-y="0.0" name="FinishedInspect_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="26.55" y="19.0"/>
       <place label-x="-8.5" label-y="0.0" name="Discharging_after_inspect_&lt;1&gt;_&lt;2&gt;" x="26.0" y="25.0"/>
-      <transition label-x="-11.0" label-y="0.5" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" weight="1" x="23.85" y="30.0"/>
-      <transition label-x="10.5" label-y="0.0" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" weight="1" x="30.85" y="30.0"/>
+      <transition label-x="-11.0" label-y="0.5" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="23.85" y="30.0"/>
+      <transition label-x="10.5" label-y="0.0" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" x="30.85" y="30.0"/>
       <place label-x="3.0" label-y="0.5" name="&lt;1&gt;_&lt;2&gt;" x="26.0" y="2.0"/>
       <place label-x="0.5" name="&lt;1&gt;_&lt;3&gt;" x="30.0" y="35.0"/>
       <text-box bold="true" border-color="#000000" fill-color="none" height="8.5" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" vert-pos="0" width="17.5" x="64.25" y="3.75">&lt;1&gt; : origin
@@ -72,7 +72,7 @@
 </text-box>
       <place label-x="6.5" label-y="-1.0" marking="1" name="r.RequiredInspection&lt;1&gt;" x="43.0" y="2.0"/>
       <place label-x="6.0" label-y="0.0" name="r.InspectionsGlobal" x="43.0" y="12.0"/>
-      <transition label-x="5.5" label-y="0.0" name="InspectedAll" rotation="4.71238898038469" type="IMM" x="43.85" y="7.0"/>
+      <transition label-x="5.5" label-y="0.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="43.550000000000004" y="7.0"/>
     </nodes>
     <edges>
       <arc head="Inspecting_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
@@ -96,7 +96,7 @@
     <nodes>
       <transition label-x="4.5" label-y="0.0" name="Inspect_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="26.85" y="7.0"/>
       <place label-x="5.0" label-y="0.0" name="Inspecting_&lt;1&gt;_&lt;2&gt;" x="26.0" y="12.0"/>
-      <transition delay="0.2" label-x="7.0" label-y="0.0" name="FinishedInspect_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="26.55" y="19.0"/>
+      <transition delay="0.0111" label-x="7.0" label-y="0.0" name="FinishedInspect_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="26.55" y="19.0"/>
       <place label-x="8.0" label-y="0.0" name="Discharging_after_inspect_&lt;1&gt;_&lt;2&gt;" x="26.0" y="25.0"/>
       <transition label-x="-11.0" label-y="0.5" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" weight="4" x="23.85" y="30.0"/>
       <transition label-x="10.0" label-y="0.0" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" weight="1" x="30.85" y="30.0"/>
@@ -108,7 +108,7 @@
 </text-box>
       <place label-x="6.5" label-y="-1.0" marking="1" name="r.RequiredInspection&lt;1&gt;" x="44.0" y="2.0"/>
       <place label-x="6.0" label-y="0.0" name="r.InspectionsGlobal" x="44.0" y="12.0"/>
-      <transition label-x="5.5" label-y="0.0" name="InspectedAll" rotation="4.71238898038469" type="IMM" x="44.85" y="7.0"/>
+      <transition label-x="5.5" label-y="0.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="44.550000000000004" y="7.0"/>
     </nodes>
     <edges>
       <arc head="Inspecting_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
@@ -151,12 +151,12 @@
     <nodes>
       <transition label-x="5.0" label-y="0.0" name="Charge_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="23.85" y="8.0"/>
       <place label-x="5.0" label-y="0.0" name="Charging_&lt;1&gt;_&lt;2&gt;" x="29.0" y="13.0"/>
-      <transition label-x="8.0" label-y="0.0" name="FinishedBeingCharged_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="29.55" y="20.0"/>
+      <transition delay="0.005555556" label-x="8.0" label-y="0.0" name="FinishedBeingCharged_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="29.55" y="20.0"/>
       <place label-x="3.0" label-y="0.0" name="&lt;1&gt;_&lt;3&gt;" x="29.0" y="26.0"/>
       <place label-x="3.0" label-y="-0.5" name="&lt;1&gt;_&lt;2&gt;" x="29.0" y="3.0"/>
       <place label-y="-2.0" name="&lt;1&gt;_UGV" x="13.0" y="3.0"/>
       <place label-x="-6.5" label-y="0.0" name="UGV_Charging_&lt;1&gt;" x="17.0" y="13.0"/>
-      <transition name="FinishedCharging_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="17.55" y="20.0"/>
+      <transition delay="0.005555556" label-x="-7.0" label-y="-0.5" name="FinishedCharging_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="17.55" y="20.0"/>
       <text-box bold="true" border-color="#000000" fill-color="none" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" text-size="LARGE" vert-pos="0" width="17.0" x="40.0" y="2.0">&lt;1&gt; : panel
 &lt;2&gt; : battery level
 &lt;3&gt; : maximum battery level
