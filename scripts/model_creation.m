@@ -16,8 +16,6 @@ plot(topological_map)
 PNPRO_path = 'cpr_solarfarm.PNPRO';
 [nGSPN, GSPN_list] = ImportfromGreatSPN(PNPRO_path);
 
-LocationsModel  = GSPN_list.heterogeneous_team;
-
 NavigationModelFullBattery = GSPN_list.navigation_fullbattery;
 NavigationModelHalfBattery = GSPN_list.navigation_halffullbattery;
 
@@ -26,7 +24,7 @@ UGVNavigationModel         = GSPN_list.navigation_UGV;
 InspectionModelFullBattery = GSPN_list.inspection_fullbattery;
 InspectionModelHalfBattery = GSPN_list.inspection_halffullbattery;
 
-ChargingModel   = GSPN_list.charging;
+ChargingModel   = GSPN_list.charging_without_wait;
 
 %% Building GSPNR object
 
@@ -64,18 +62,22 @@ end
 %Charging
 for n_index = 1:nNodes
     node_name = nodes(n_index);
-    for b_level = 1:battery_levels
-        battery_level = battery_level_names(b_level);
-        if battery_level == "B0"
-            charging = copy(ChargingModel);
-            charging.format([node_name, battery_level, "B2"]);
-            solarfarm = MergeGSPNR(solarfarm, charging);
-        end
-        if battery_level == "B1"
-            continue;
-        end
-        if battery_level == "B2"
-            continue;
+    if node_name == "center"
+        continue
+    else
+        for b_level = 1:battery_levels
+            battery_level = battery_level_names(b_level);
+            if battery_level == "B0"
+                charging = copy(ChargingModel);
+                charging.format([node_name, battery_level, "B2"]);
+                solarfarm = MergeGSPNR(solarfarm, charging);
+            end
+            if battery_level == "B1"
+                continue;
+            end
+            if battery_level == "B2"
+                continue;
+            end
         end
     end
 end
@@ -153,13 +155,13 @@ solarfarm.set_reward_functions(reward_elements, reward_values, reward_types);
 
 %Set robots initial locations
 initial_marking = solarfarm.initial_marking;
-center_index = solarfarm.find_place_index("center_B2");
-panel1_index_UGV = solarfarm.find_place_index("panel1_UGV");
+UAV_center_index = solarfarm.find_place_index("center_B2");
+UGV_center_index = solarfarm.find_place_index("center_UGV");
 
 %Place Jackals
-initial_marking(center_index) = 2;
+initial_marking(UAV_center_index) = 2;
 %Place Warthog
-initial_marking(panel1_index_UGV) = 1;
+initial_marking(UGV_center_index) = 1;
 
 
 %Set initial counter, all panels need inspection
@@ -172,4 +174,4 @@ end
 
 solarfarm.set_initial_marking(initial_marking);
 
-[mdp, markings, states, types] = solarfarm.toMDP_without_wait();
+[mdp, markings, states, types] = solarfarm.toMDP();
