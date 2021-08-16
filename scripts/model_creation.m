@@ -24,7 +24,7 @@ UGVNavigationModel         = GSPN_list.navigation_UGV;
 InspectionModelFullBattery = GSPN_list.inspection_fullbattery;
 InspectionModelHalfBattery = GSPN_list.inspection_halffullbattery;
 
-ChargingModel   = GSPN_list.charging_without_wait;
+ChargingModel   = GSPN_list.charging;
 
 %% Building GSPNR object
 
@@ -159,7 +159,7 @@ UAV_center_index = solarfarm.find_place_index("center_B2");
 UGV_center_index = solarfarm.find_place_index("center_UGV");
 
 %Place Jackals
-initial_marking(UAV_center_index) = 2;
+initial_marking(UAV_center_index) = 3;
 %Place Warthog
 initial_marking(UGV_center_index) = 1;
 
@@ -174,4 +174,4 @@ end
 
 solarfarm.set_initial_marking(initial_marking);
 
-[mdp, markings, states, types] = solarfarm.toMDP();
+[mdp, markings, states, types] = solarfarm.toMDP_without_wait();
