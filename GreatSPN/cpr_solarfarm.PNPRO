@@ -72,7 +72,7 @@
 </text-box>
       <place label-x="6.5" label-y="-1.0" marking="1" name="r.RequiredInspection&lt;1&gt;" x="43.0" y="2.0"/>
       <place label-x="6.0" label-y="0.0" name="r.InspectionsGlobal" x="43.0" y="12.0"/>
-      <transition delay="2.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="44.55" y="7.0"/>
+      <transition delay="2.0" label-x="5.5" label-y="0.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="43.550000000000004" y="7.0"/>
     </nodes>
     <edges>
       <arc head="Inspecting_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
@@ -92,7 +92,7 @@
       <arc head="r.InspectionsGlobal" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
     </edges>
   </gspn>
-  <gspn name="inspection_halffullbattery" show-color-cmd="false" show-fluid-cmd="false" zoom="75">
+  <gspn name="inspection_halffullbattery" show-color-cmd="false" show-fluid-cmd="false">
     <nodes>
       <transition label-x="4.5" label-y="0.0" name="Inspect_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="26.85" y="7.0"/>
       <place label-x="5.0" label-y="0.0" name="Inspecting_&lt;1&gt;_&lt;2&gt;" x="26.0" y="12.0"/>
@@ -108,7 +108,7 @@
 </text-box>
       <place label-x="6.5" label-y="-1.0" marking="1" name="r.RequiredInspection&lt;1&gt;" x="44.0" y="2.0"/>
       <place label-x="6.0" label-y="0.0" name="r.InspectionsGlobal" x="44.0" y="12.0"/>
-      <transition delay="2.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="47.55" y="7.0"/>
+      <transition delay="2.0" label-x="5.5" label-y="0.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="44.550000000000004" y="7.0"/>
     </nodes>
     <edges>
       <arc head="Inspecting_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
@@ -147,7 +147,7 @@
       <arc head="&lt;2&gt;_UGV" kind="OUTPUT" tail="Arrived_&lt;1&gt;_&lt;2&gt;_UGV"/>
     </edges>
   </gspn>
-  <gspn name="charging" show-color-cmd="false" show-fluid-cmd="false">
+  <gspn name="charging" show-color-cmd="false" show-fluid-cmd="false" zoom="125">
     <nodes>
       <transition label-x="5.0" label-y="0.0" name="Charge_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="23.85" y="8.0"/>
       <place label-x="5.0" label-y="0.0" name="Charging_&lt;1&gt;_&lt;2&gt;" x="29.0" y="13.0"/>
@@ -181,25 +181,24 @@
       <arc head="&lt;1&gt;_UGV_Wait" kind="OUTPUT" tail="&lt;1&gt;_UGV_Charge"/>
     </edges>
   </gspn>
-  <gspn name="charging_without_wait" show-color-cmd="false" show-fluid-cmd="false">
+  <gspn name="new_charging" show-color-cmd="false" show-fluid-cmd="false" zoom="125">
     <nodes>
       <transition label-x="5.0" label-y="0.0" name="Charge_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="23.85" y="8.0"/>
       <place label-x="5.0" label-y="0.0" name="Charging_&lt;1&gt;_&lt;2&gt;" x="29.0" y="13.0"/>
-      <transition delay="0.005555556" label-x="8.0" label-y="0.0" name="FinishedBeingCharged_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="29.55" y="20.0"/>
       <place label-x="3.0" label-y="0.0" name="&lt;1&gt;_&lt;3&gt;" x="29.0" y="26.0"/>
       <place label-x="3.0" label-y="-0.5" name="&lt;1&gt;_&lt;2&gt;" x="29.0" y="3.0"/>
-      <place label-y="-2.0" name="&lt;1&gt;_UGV" x="17.0" y="3.0"/>
+      <place label-y="-2.0" name="&lt;1&gt;_UGV" x="13.0" y="3.0"/>
       <place label-x="-6.5" label-y="0.0" name="UGV_Charging_&lt;1&gt;" x="17.0" y="13.0"/>
-      <transition delay="0.005555556" label-x="-7.0" label-y="-0.5" name="FinishedCharging_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="17.55" y="20.0"/>
+      <transition delay="0.005555556" delay-x="2.0" delay-y="0.0" label-x="-7.0" label-y="-0.5" name="FinishedCharging_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="23.55" y="20.0"/>
       <text-box bold="true" border-color="#000000" fill-color="none" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" text-size="LARGE" vert-pos="0" width="17.0" x="40.0" y="2.0">&lt;1&gt; : panel
 &lt;2&gt; : battery level
 &lt;3&gt; : maximum battery level
 </text-box>
+      <place label-x="-5.0" label-y="0.0" name="&lt;1&gt;_UGV_Wait" x="17.0" y="8.0"/>
+      <transition label-x="4.0" label-y="-1.0" name="&lt;1&gt;_UGV_Charge" rotation="4.71238898038469" type="IMM" x="17.85" y="3.0"/>
     </nodes>
     <edges>
       <arc head="Charging_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Charge_&lt;1&gt;_&lt;2&gt;"/>
-      <arc head="FinishedBeingCharged_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="Charging_&lt;1&gt;_&lt;2&gt;"/>
-      <arc head="&lt;1&gt;_&lt;3&gt;" kind="OUTPUT" tail="FinishedBeingCharged_&lt;1&gt;_&lt;2&gt;"/>
       <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_&lt;2&gt;"/>
       <arc head="UGV_Charging_&lt;1&gt;" kind="OUTPUT" tail="Charge_&lt;1&gt;_&lt;2&gt;"/>
       <arc head="FinishedCharging_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="UGV_Charging_&lt;1&gt;"/>
@@ -208,7 +207,110 @@
         <point x="3.5" y="27.0"/>
         <point x="3.5" y="4.0"/>
       </arc>
-      <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_UGV"/>
+      <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_UGV_Wait"/>
+      <arc head="&lt;1&gt;_UGV_Charge" kind="INPUT" tail="&lt;1&gt;_UGV"/>
+      <arc head="&lt;1&gt;_UGV_Wait" kind="OUTPUT" tail="&lt;1&gt;_UGV_Charge"/>
+      <arc head="FinishedCharging_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="Charging_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="&lt;1&gt;_&lt;3&gt;" kind="OUTPUT" tail="FinishedCharging_&lt;1&gt;_&lt;2&gt;"/>
+    </edges>
+  </gspn>
+  <gspn name="copy of new_charging" show-color-cmd="false" show-fluid-cmd="false" zoom="125">
+    <nodes>
+      <transition label-x="5.0" label-y="0.0" name="Charge_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" x="23.85" y="8.0"/>
+      <place label-x="5.0" label-y="0.0" name="Charging_&lt;1&gt;_&lt;2&gt;" x="29.0" y="13.0"/>
+      <place label-x="3.0" label-y="0.0" name="&lt;1&gt;_&lt;3&gt;" x="29.0" y="26.0"/>
+      <place label-x="3.0" label-y="-0.5" name="&lt;1&gt;_&lt;2&gt;" x="29.0" y="3.0"/>
+      <place label-y="-2.0" name="&lt;1&gt;_UGV" x="13.0" y="3.0"/>
+      <place label-x="-6.5" label-y="0.0" name="UGV_Charging_&lt;1&gt;" x="17.0" y="13.0"/>
+      <transition delay="0.005555556" delay-x="2.0" delay-y="0.0" label-x="-7.0" label-y="-0.5" name="FinishedCharging_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="23.55" y="20.0"/>
+      <text-box bold="true" border-color="#000000" fill-color="none" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" text-size="LARGE" vert-pos="0" width="17.0" x="40.0" y="2.0">&lt;1&gt; : panel
+&lt;2&gt; : battery level
+&lt;3&gt; : maximum battery level
+</text-box>
+      <place label-x="-5.0" label-y="0.0" name="&lt;1&gt;_UGV_Wait" x="17.0" y="8.0"/>
+      <transition label-x="4.0" label-y="-1.0" name="&lt;1&gt;_UGV_Charge" rotation="4.71238898038469" type="IMM" x="17.85" y="3.0"/>
+      <transition name="t0" rotation="1.5707963267948966" type="IMM" x="55.85" y="16.0"/>
+      <place name="P0" x="46.0" y="20.0"/>
+      <place label-x="2.0" label-y="0.0" name="P1" x="55.0" y="20.0"/>
+      <transition label-x="-3.0" label-y="0.0" name="T0" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="46.55" y="28.0"/>
+      <transition label-x="2.5" label-y="-0.5" name="T1" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="56.55" y="28.0"/>
+      <place marking="1" name="P2" x="46.0" y="11.0"/>
+      <place marking="1" name="P3" x="55.0" y="11.0"/>
+      <place name="P4" x="43.0" y="37.0"/>
+      <place name="P5" x="46.0" y="37.0"/>
+      <place name="P6" x="53.0" y="37.0"/>
+      <place name="P7" x="56.0" y="37.0"/>
+      <transition name="T2" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="65.55" y="28.0"/>
+      <place name="P8" x="62.0" y="37.0"/>
+      <place name="P9" x="65.0" y="37.0"/>
+      <place marking="1" name="P10" x="65.0" y="11.0"/>
+      <place name="P11" x="65.0" y="20.0"/>
+      <place name="P12" x="49.0" y="37.0"/>
+      <place name="P13" x="59.0" y="37.0"/>
+      <place name="P14" x="68.0" y="37.0"/>
+    </nodes>
+    <edges>
+      <arc head="Charging_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Charge_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="UGV_Charging_&lt;1&gt;" kind="OUTPUT" tail="Charge_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="FinishedCharging_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="UGV_Charging_&lt;1&gt;"/>
+      <arc head="&lt;1&gt;_UGV" kind="OUTPUT" tail="FinishedCharging_&lt;1&gt;_&lt;2&gt;">
+        <point x="18.0" y="27.0"/>
+        <point x="3.5" y="27.0"/>
+        <point x="3.5" y="4.0"/>
+      </arc>
+      <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_UGV_Wait"/>
+      <arc head="&lt;1&gt;_UGV_Charge" kind="INPUT" tail="&lt;1&gt;_UGV"/>
+      <arc head="&lt;1&gt;_UGV_Wait" kind="OUTPUT" tail="&lt;1&gt;_UGV_Charge"/>
+      <arc head="FinishedCharging_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="Charging_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="&lt;1&gt;_&lt;3&gt;" kind="OUTPUT" tail="FinishedCharging_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="P0" kind="OUTPUT" tail="t0"/>
+      <arc head="P1" kind="OUTPUT" tail="t0"/>
+      <arc head="T0" kind="INPUT" tail="P0"/>
+      <arc head="T0" kind="INPUT" tail="P1"/>
+      <arc head="T1" kind="INPUT" tail="P0"/>
+      <arc head="T1" kind="INPUT" tail="P1"/>
+      <arc head="t0" kind="INPUT" tail="P2"/>
+      <arc head="t0" kind="INPUT" tail="P3"/>
+      <arc head="P4" kind="OUTPUT" tail="T0"/>
+      <arc head="P5" kind="OUTPUT" tail="T0"/>
+      <arc head="P6" kind="OUTPUT" tail="T1"/>
+      <arc head="P7" kind="OUTPUT" tail="T1"/>
+      <arc head="T2" kind="INPUT" tail="P0"/>
+      <arc head="T2" kind="INPUT" tail="P1"/>
+      <arc head="P8" kind="OUTPUT" tail="T2"/>
+      <arc head="P9" kind="OUTPUT" tail="T2"/>
+      <arc head="t0" kind="INPUT" tail="P10"/>
+      <arc head="P11" kind="OUTPUT" tail="t0"/>
+      <arc head="T0" kind="INPUT" tail="P11"/>
+      <arc head="T1" kind="INPUT" tail="P11"/>
+      <arc head="T2" kind="INPUT" tail="P11"/>
+      <arc head="P12" kind="OUTPUT" tail="T0"/>
+      <arc head="P13" kind="OUTPUT" tail="T1"/>
+      <arc head="P14" kind="OUTPUT" tail="T2"/>
+    </edges>
+  </gspn>
+  <gspn name="testing" show-color-cmd="false" show-fluid-cmd="false">
+    <nodes>
+      <place label-x="-4.0" label-y="0.0" marking="1" name="UAV_ready" x="9.0" y="6.0"/>
+      <place label-x="-4.0" label-y="0.0" marking="1" name="UGV_ready" x="9.0" y="17.0"/>
+      <transition label-x="-4.5" label-y="0.0" name="joint_decision" type="IMM" x="15.85" y="11.0"/>
+      <place name="UAV_doing" x="22.0" y="6.0"/>
+      <place name="UGV_doing" x="22.0" y="17.0"/>
+      <transition name="UAV_finished" nservers-x="0.5" type="EXP" x="32.55" y="6.0"/>
+      <transition name="UGV_finished" nservers-x="0.5" type="EXP" x="32.55" y="17.0"/>
+      <place name="UAV_done" x="44.0" y="6.0"/>
+      <place name="UGV_done" x="44.0" y="17.0"/>
+    </nodes>
+    <edges>
+      <arc head="joint_decision" kind="INPUT" tail="UAV_ready"/>
+      <arc head="joint_decision" kind="INPUT" tail="UGV_ready"/>
+      <arc head="UAV_doing" kind="OUTPUT" tail="joint_decision"/>
+      <arc head="UGV_doing" kind="OUTPUT" tail="joint_decision"/>
+      <arc head="UAV_finished" kind="INPUT" tail="UAV_doing"/>
+      <arc head="UGV_finished" kind="INPUT" tail="UGV_doing"/>
+      <arc head="UAV_done" kind="OUTPUT" tail="UAV_finished"/>
+      <arc head="UGV_done" kind="OUTPUT" tail="UGV_finished"/>
     </edges>
   </gspn>
 </project>

@@ -24,7 +24,7 @@ UGVNavigationModel         = GSPN_list.navigation_UGV;
 InspectionModelFullBattery = GSPN_list.inspection_fullbattery;
 InspectionModelHalfBattery = GSPN_list.inspection_halffullbattery;
 
-ChargingModel   = GSPN_list.charging;
+ChargingModel   = GSPN_list.new_charging;
 
 %% Building GSPNR object
 
@@ -173,5 +173,8 @@ for place_name_index = 1:size(needs_inspection, 2)
 end
 
 solarfarm.set_initial_marking(initial_marking);
+
+% load("last_workspace.mat")
+% [mdp, markings, states, types] = solarfarm.continue_toMDP_without_wait(workspace);
 
 [mdp, markings, states, types] = solarfarm.toMDP_without_wait();
