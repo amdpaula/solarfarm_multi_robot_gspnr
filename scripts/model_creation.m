@@ -16,13 +16,13 @@ plot(topological_map)
 PNPRO_path = 'cpr_solarfarm.PNPRO';
 [nGSPN, GSPN_list] = ImportfromGreatSPN(PNPRO_path);
 
-NavigationModelFullBattery = GSPN_list.navigation_fullbattery;
 NavigationModelHalfBattery = GSPN_list.navigation_halffullbattery;
+NavigationToCenter         = GSPN_list.navigation_halffullbattery_to_center;
 
 UGVNavigationModel         = GSPN_list.navigation_UGV;
 
-InspectionModelFullBattery = GSPN_list.inspection_fullbattery;
 InspectionModelHalfBattery = GSPN_list.inspection_halffullbattery;
+InspectionwithWait         = GSPN_list.inspection_halffullbattery_with_wait_state;
 
 ChargingModel   = GSPN_list.new_charging;
 
@@ -30,8 +30,8 @@ ChargingModel   = GSPN_list.new_charging;
 
 solarfarm = GSPNR();
 
-battery_levels = 3;
-battery_level_names = ["B0", "B1", "B2"];
+battery_levels = 2;
+battery_level_names = ["B0", "B1"];
 %Inspection
 nodes = string(table2array(topological_map.Nodes));
 nNodes = size(nodes, 1);
@@ -39,6 +39,18 @@ for n_index = 1:nNodes
     node_name = nodes(n_index);
     if node_name == "center"
         continue
+    elseif node_name == "panel4"
+        for b_level = 1:battery_levels
+            battery_level = battery_level_names(b_level);
+            if battery_level == "B0"
+                continue
+            end
+            if battery_level == "B1"
+                inspectionfullbattery = copy(InspectionwithWait);
+                inspectionfullbattery.format([node_name, "B1", "B0"]);
+                solarfarm = MergeGSPNR(solarfarm, inspectionfullbattery);
+            end
+        end
     else
         for b_level = 1:battery_levels
             battery_level = battery_level_names(b_level);
@@ -46,13 +58,8 @@ for n_index = 1:nNodes
                 continue
             end
             if battery_level == "B1"
-                inspection_halfbattery = copy(InspectionModelHalfBattery);
-                inspection_halfbattery.format([node_name, "B1", "B0"]);
-                solarfarm = MergeGSPNR(solarfarm, inspection_halfbattery);
-            end
-            if battery_level == "B2"
-                inspectionfullbattery = copy(InspectionModelFullBattery);
-                inspectionfullbattery.format([node_name, "B2", "B1"]);
+                inspectionfullbattery = copy(InspectionModelHalfBattery);
+                inspectionfullbattery.format([node_name, "B1", "B0"]);
                 solarfarm = MergeGSPNR(solarfarm, inspectionfullbattery);
             end
         end
@@ -75,9 +82,6 @@ for n_index = 1:nNodes
             if battery_level == "B1"
                 continue;
             end
-            if battery_level == "B2"
-                continue;
-            end
         end
     end
 end
@@ -89,22 +93,31 @@ for e_index = 1:nEdges
     source = edges(e_index, 1);
     target = edges(e_index, 2);
     rate = 1/weights(e_index);
-    for b_level = 1:battery_levels
-        battery_level = battery_level_names(b_level);
-        if battery_level == "B0"
-            continue;
+    if target == "center"
+        for b_level = 1:battery_levels
+            battery_level = battery_level_names(b_level);
+            if battery_level == "B0"
+                continue;
+            end
+            if battery_level == "B1"
+                navigation_fullbattery = copy(NavigationToCenter);
+                navigation_fullbattery.change_rate_of_transition("Arrived_<1>_<2>_<3>", rate);
+                navigation_fullbattery.format([source, target, "B1", "B0"]);
+                solarfarm = MergeGSPNR(solarfarm, navigation_fullbattery);
+            end
         end
-        if battery_level == "B1"
-            navigation_halfbattery = copy(NavigationModelHalfBattery);
-            navigation_halfbattery.change_rate_of_transition("Arrived_<1>_<2>_<3>", rate);
-            navigation_halfbattery.format([source, target, "B1", "B0"]);            
-            solarfarm = MergeGSPNR(solarfarm, navigation_halfbattery);
-        end
-        if battery_level == "B2"
-            navigation_fullbattery = copy(NavigationModelFullBattery);
-            navigation_fullbattery.change_rate_of_transition("Arrived_<1>_<2>_<3>", rate);
-            navigation_fullbattery.format([source, target, "B2", "B1"]);
-            solarfarm = MergeGSPNR(solarfarm, navigation_fullbattery);
+    else
+        for b_level = 1:battery_levels
+            battery_level = battery_level_names(b_level);
+            if battery_level == "B0"
+                continue;
+            end
+            if battery_level == "B1"
+                navigation_fullbattery = copy(NavigationModelHalfBattery);
+                navigation_fullbattery.change_rate_of_transition("Arrived_<1>_<2>_<3>", rate);
+                navigation_fullbattery.format([source, target, "B1", "B0"]);
+                solarfarm = MergeGSPNR(solarfarm, navigation_fullbattery);
+            end
         end
     end
     ugv_navigation = copy(UGVNavigationModel);
@@ -113,39 +126,33 @@ for e_index = 1:nEdges
     solarfarm = MergeGSPNR(solarfarm, ugv_navigation);
 end
 
-global_arc_places = ["r.InspectionsGlobal","r.RequiredInspectionpanel1","r.RequiredInspectionpanel2","r.RequiredInspectionpanel3","r.RequiredInspectionpanel4","r.RequiredInspectionpanel5"];  
-global_arc_trans  = ["InspectedAll"       ,"InspectedAll","InspectedAll","InspectedAll","InspectedAll","InspectedAll"];
-global_arc_type   = ["in"                 ,"out"         ,"out"        ,"out"       ,"out"      ,"out"          ];
-global_arc_weights= [5                    ,1             ,1             ,1             ,1             ,1             ];
+global_arc_places = ["r.InspectionsGlobal","r.RequiredInspectionpanel1","r.RequiredInspectionpanel2","r.RequiredInspectionpanel3","r.RequiredInspectionpanel4"];  
+global_arc_trans  = ["InspectedAll"       ,"InspectedAll"              ,"InspectedAll"              ,"InspectedAll"              ,"InspectedAll"              ];
+global_arc_type   = ["in"                 ,"out"                       ,"out"                       ,"out"                       ,"out"                       ];
+global_arc_weights= [4                    ,1                           ,1                           ,1                           ,1                           ];
 
 solarfarm.add_arcs(global_arc_places,global_arc_trans,global_arc_type,global_arc_weights);
 
-reward_elements = ["Inspect_panel1_B2","Inspect_panel1_B1",...
-                   "Inspect_panel2_B2","Inspect_panel2_B1",...
-                   "Inspect_panel3_B2","Inspect_panel3_B1",...
-                   "Inspect_panel4_B2","Inspect_panel4_B1",...
-                   "Inspect_panel5_B2","Inspect_panel5_B1",...
+reward_elements = ["Inspect_panel1_B1",...
+                   "Inspect_panel2_B1",...
+                   "Inspect_panel3_B1",...
+                   "Inspect_panel4_B1",...
                    "panel1_B0",...
                    "panel2_B0",...
                    "panel3_B0",...
-                   "panel4_B0",...
-                   "panel5_B0"];
-reward_types = ["transition", "transition",...
-                "transition", "transition",...
-                "transition", "transition",...
-                "transition", "transition",...
-                "transition", "transition",...
-                "place",...
+                   "panel4_B0"];
+reward_types = ["transition",...
+                "transition",...
+                "transition",...
+                "transition",...
                 "place",...
                 "place",...
                 "place",...
                 "place"];
-reward_values = [1, 1,...
-                 1, 1,...
-                 1, 1,...
-                 1, 1,...
-                 1, 1,...
-                -1,...
+reward_values = [200,...
+                 200,...
+                 200,...
+                 200,...
                 -1,...
                 -1,...
                 -1,...
@@ -155,7 +162,7 @@ solarfarm.set_reward_functions(reward_elements, reward_values, reward_types);
 
 %Set robots initial locations
 initial_marking = solarfarm.initial_marking;
-UAV_center_index = solarfarm.find_place_index("center_B2");
+UAV_center_index = solarfarm.find_place_index("center_B1");
 UGV_center_index = solarfarm.find_place_index("center_UGV");
 
 %Place Jackals
@@ -178,3 +185,7 @@ solarfarm.set_initial_marking(initial_marking);
 % [mdp, markings, states, types] = solarfarm.continue_toMDP_without_wait(workspace);
 
 [mdp, markings, states, types] = solarfarm.toMDP_without_wait();
+
+description = "GSPNR - no discharging in any navigation to center; panel4 has wait state; inspection reward at 200";
+
+save("second_iteration_model1.mat", "description", "solarfarm", "mdp", "markings", "states", "types");

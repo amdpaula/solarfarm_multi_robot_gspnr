@@ -1,7 +1,7 @@
 clc
 clear
 
-load("initial_model_with_WAIT_2UAV_nocharge_center.mat");
+load("second_iteration_model1.mat");
 
 mdp.check_validity();
 mdp.set_enabled_actions();
