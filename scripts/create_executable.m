@@ -7,15 +7,15 @@ clear
 % load("robocup_model_accurate_rates.mat");
 % load("robocup_policy_accurate_rates.mat", "policy");
 
-load("3UAV_2battery_levels_policy.mat")
-
-solarfarm = gspn;
+load("fourth_iteration_model1.mat")
+%load("fourth_iteration_policy.mat")
+load("fourth_iteration_handcrafted_policy")
 %% Setting up policy
-policy_struct.gspn = solarfarm;
-policy_struct.state_index_to_markings = markings;
-policy_struct.states = states;
-policy_struct.mdp = mdp;
-policy_struct.mdp_policy = policy;
+% policy_struct.gspn = solarfarm;
+% policy_struct.state_index_to_markings = markings;
+% policy_struct.states = states;
+% policy_struct.mdp = mdp;
+% policy_struct.mdp_policy = policy;
 
 %% Changing immediate transitions to exponential transitions - for 'Bat_Levels...'
 solarfarm_imm = copy(solarfarm);
@@ -99,6 +99,17 @@ for p_index = 1:nActionPlaces
         end
         
     end
+    
+    if endsWith(place_name, "UGV_Wait")
+        action_map.(place_name).server_name = "WaitActionServer";
+        action_map.(place_name).package_name = UAV_package_name;
+        action_map.(place_name).action_name = "WaitAction";
+        action_map.(place_name).message = struct("time", uint32(1));
+        action_map.(place_name).with_result = true;
+        components = strsplit(place_name, "_");
+        transition = components(1)+"_"+components(2)+"_Finished_Waiting";
+        action_map.(place_name).result_trans = struct("success", transition);
+    end
     if startsWith(place_name, "Inspecting")
         action_map.(place_name).server_name = "InspectWaypointActionServer";
         action_map.(place_name).package_name = UAV_package_name;
@@ -124,6 +135,7 @@ for p_index = 1:nActionPlaces
         action_map.(place_name).with_result = false;
     end
 end
+
 %% Creating executable
 
 executable = ExecutableGSPNR();
@@ -131,12 +143,13 @@ executable = ExecutableGSPNR();
 executable.initialize(solarfarm_imm, [], action_map);
 
 tic
-executable.set_policy(policy_struct);
+%executable.set_empty_policy();
+executable.set_manual_policy(handcrafted_policy.markings, handcrafted_policy.transitions);
 toc
 
 %% Setting up robot type mapping
 
-executable.add_robots(["jackal0", "jackal1", "jackal2", "warthog"], ["center_B1" "center_B1" "center_B1", "center_UGV"]);
+executable.add_robots(["jackal0", "jackal1", "warthog"], ["center_B1", "center_B1", "center_UGV"]);
 
 places = [string.empty];
 types = [string.empty];
@@ -158,4 +171,4 @@ executable.set_types(["UAV", "UGV"], places, types);
 
 %% Saving workspace
 
-save("executable_approximated_rates.mat", "executable");
+save("executable_fourth_iteration_handcrafted_policy.mat", "executable");

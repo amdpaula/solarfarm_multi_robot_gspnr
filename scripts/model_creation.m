@@ -13,7 +13,7 @@ plot(topological_map)
 
 %% Importing Models from GreatSPN
 
-PNPRO_path = 'cpr_solarfarm.PNPRO';
+PNPRO_path = 'cpr_solarfarm_final.PNPRO';
 [nGSPN, GSPN_list] = ImportfromGreatSPN(PNPRO_path);
 
 NavigationModelHalfBattery = GSPN_list.navigation_halffullbattery;
@@ -22,7 +22,6 @@ NavigationToCenter         = GSPN_list.navigation_halffullbattery_to_center;
 UGVNavigationModel         = GSPN_list.navigation_UGV;
 
 InspectionModelHalfBattery = GSPN_list.inspection_halffullbattery;
-InspectionwithWait         = GSPN_list.inspection_halffullbattery_with_wait_state;
 
 ChargingModel   = GSPN_list.new_charging;
 
@@ -39,18 +38,6 @@ for n_index = 1:nNodes
     node_name = nodes(n_index);
     if node_name == "center"
         continue
-    elseif node_name == "panel4"
-        for b_level = 1:battery_levels
-            battery_level = battery_level_names(b_level);
-            if battery_level == "B0"
-                continue
-            end
-            if battery_level == "B1"
-                inspectionfullbattery = copy(InspectionwithWait);
-                inspectionfullbattery.format([node_name, "B1", "B0"]);
-                solarfarm = MergeGSPNR(solarfarm, inspectionfullbattery);
-            end
-        end
     else
         for b_level = 1:battery_levels
             battery_level = battery_level_names(b_level);
@@ -76,7 +63,7 @@ for n_index = 1:nNodes
             battery_level = battery_level_names(b_level);
             if battery_level == "B0"
                 charging = copy(ChargingModel);
-                charging.format([node_name, battery_level, "B2"]);
+                charging.format([node_name, battery_level, "B1"]);
                 solarfarm = MergeGSPNR(solarfarm, charging);
             end
             if battery_level == "B1"
@@ -166,7 +153,7 @@ UAV_center_index = solarfarm.find_place_index("center_B1");
 UGV_center_index = solarfarm.find_place_index("center_UGV");
 
 %Place Jackals
-initial_marking(UAV_center_index) = 3;
+initial_marking(UAV_center_index) = 2;
 %Place Warthog
 initial_marking(UGV_center_index) = 1;
 
@@ -188,4 +175,4 @@ solarfarm.set_initial_marking(initial_marking);
 
 description = "GSPNR - no discharging in any navigation to center; panel4 has wait state; inspection reward at 200";
 
-save("second_iteration_model1.mat", "description", "solarfarm", "mdp", "markings", "states", "types");
+save("fourth_iteration_model1.mat", "description", "solarfarm", "mdp", "markings", "states", "types");

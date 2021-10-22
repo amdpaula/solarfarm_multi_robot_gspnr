@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- This project file has been saved by the New GreatSPN Editor, v.100 --><project name="cpr_solarfarm" version="121">
+  <gspn name="navigation_halffullbattery" show-color-cmd="false" show-fluid-cmd="false">
+    <nodes>
+      <transition label-x="-4.0" label-y="0.0" name="Go_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" weight="0" x="25.85" y="7.0"/>
+      <place label-x="9.0" label-y="0.0" name="Navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" x="25.0" y="12.0"/>
+      <transition label-x="-5.5" label-y="0.0" name="Arrived_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="25.55" y="19.0"/>
+      <place label-x="10.0" label-y="0.0" name="Discharging_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" x="25.0" y="25.0"/>
+      <transition label-x="-11.0" label-y="-0.5" name="Discharged_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" weight="0.8" x="22.85" y="30.0"/>
+      <transition label-x="12.5" label-y="0.0" name="Discharged_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;_&lt;4&gt;" rotation="4.71238898038469" type="IMM" weight="0.2" x="29.85" y="30.0"/>
+      <place label-x="-2.5" label-y="0.0" name="&lt;2&gt;_&lt;3&gt;" x="22.0" y="36.0"/>
+      <place label-x="3.0" label-y="0.0" name="&lt;2&gt;_&lt;4&gt;" x="29.0" y="36.0"/>
+      <place label-x="2.5" label-y="0.0" name="&lt;1&gt;_&lt;3&gt;" x="25.0" y="2.0"/>
+      <text-box bold="true" border-color="#000000" fill-color="none" height="8.5" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" vert-pos="0" width="17.5" x="39.0" y="0.5">&lt;1&gt; : origin
+&lt;2&gt; : destination
+&lt;3&gt; : battery_level_before
+&lt;4&gt; : battery_level_before-1
+</text-box>
+    </nodes>
+    <edges>
+      <arc head="Navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="OUTPUT" tail="Go_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="Arrived_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="INPUT" tail="Navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="Discharging_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="OUTPUT" tail="Arrived_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="Discharged_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;_&lt;3&gt;" kind="INPUT" tail="Discharging_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="Discharged_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;_&lt;4&gt;" kind="INPUT" tail="Discharging_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="&lt;2&gt;_&lt;3&gt;" kind="OUTPUT" tail="Discharged_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;_&lt;3&gt;"/>
+      <arc head="&lt;2&gt;_&lt;4&gt;" kind="OUTPUT" tail="Discharged_after_navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;_&lt;4&gt;"/>
+      <arc head="Go_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="INPUT" tail="&lt;1&gt;_&lt;3&gt;"/>
+    </edges>
+  </gspn>
+  <gspn name="navigation_halffullbattery_to_center" show-color-cmd="false" show-fluid-cmd="false">
+    <nodes>
+      <transition label-x="-4.0" label-y="0.0" name="Go_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" weight="0" x="25.85" y="7.0"/>
+      <place label-x="9.0" label-y="0.0" name="Navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" x="25.0" y="12.0"/>
+      <transition label-x="-5.5" label-y="0.0" name="Arrived_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="25.55" y="19.0"/>
+      <place label-x="-2.5" label-y="0.0" name="&lt;2&gt;_&lt;3&gt;" x="25.0" y="28.0"/>
+      <place label-x="2.5" label-y="0.0" name="&lt;1&gt;_&lt;3&gt;" x="25.0" y="2.0"/>
+      <text-box bold="true" border-color="#000000" fill-color="none" height="8.5" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" vert-pos="0" width="17.5" x="39.0" y="0.5">&lt;1&gt; : origin
+&lt;2&gt; : destination
+&lt;3&gt; : battery_level_before
+&lt;4&gt; : battery_level_before-1
+</text-box>
+    </nodes>
+    <edges>
+      <arc head="Navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="OUTPUT" tail="Go_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="Arrived_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="INPUT" tail="Navigating_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="Go_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="INPUT" tail="&lt;1&gt;_&lt;3&gt;"/>
+      <arc head="&lt;2&gt;_&lt;3&gt;" kind="OUTPUT" tail="Arrived_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+    </edges>
+  </gspn>
+  <gspn name="inspection_halffullbattery" show-color-cmd="false" show-fluid-cmd="false">
+    <nodes>
+      <transition label-x="4.5" label-y="0.0" name="Inspect_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" weight="0" x="26.85" y="7.0"/>
+      <place label-x="5.0" label-y="0.0" name="Inspecting_&lt;1&gt;_&lt;2&gt;" x="26.0" y="12.0"/>
+      <transition delay="0.0111" label-x="7.0" label-y="0.0" name="FinishedInspect_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="26.55" y="19.0"/>
+      <place label-x="8.0" label-y="0.0" name="Discharging_after_inspect_&lt;1&gt;_&lt;2&gt;" x="26.0" y="25.0"/>
+      <transition label-x="-11.0" label-y="0.5" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" weight="0.8" weight-x="0.0" weight-y="1.5" x="23.85" y="30.0"/>
+      <transition label-x="10.0" label-y="0.0" name="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" rotation="4.71238898038469" type="IMM" weight="0.2" x="30.85" y="30.0"/>
+      <place label-x="3.0" label-y="0.5" name="&lt;1&gt;_&lt;2&gt;" x="26.0" y="2.0"/>
+      <place label-x="-2.0" label-y="2.0" name="&lt;1&gt;_&lt;3&gt;" x="30.0" y="35.0"/>
+      <text-box bold="true" border-color="#000000" fill-color="none" height="8.5" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" vert-pos="0" width="17.5" x="68.25" y="2.75">&lt;1&gt; : origin
+&lt;2&gt; : battery_level_before
+&lt;3&gt; : battery_level_before-1
+</text-box>
+      <place label-x="6.5" label-y="-1.0" marking="1" name="r.RequiredInspection&lt;1&gt;" x="44.0" y="2.0"/>
+      <place label-x="6.0" label-y="0.0" name="r.InspectionsGlobal" x="44.0" y="12.0"/>
+      <transition delay="2.0" label-x="5.5" label-y="0.0" name="InspectedAll" nservers-x="0.5" rotation="4.71238898038469" type="EXP" x="44.550000000000004" y="7.0"/>
+    </nodes>
+    <edges>
+      <arc head="Inspecting_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="FinishedInspect_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="Inspecting_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="Discharging_after_inspect_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="FinishedInspect_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;2&gt;" kind="INPUT" tail="Discharging_after_inspect_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;" kind="INPUT" tail="Discharging_after_inspect_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="Inspect_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="&lt;1&gt;_&lt;3&gt;" kind="OUTPUT" tail="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;3&gt;"/>
+      <arc head="&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Discharged_after_inspecting_&lt;1&gt;_&lt;2&gt;_&lt;2&gt;">
+        <point x="24.0" y="31.5"/>
+        <point x="24.0" y="36.0"/>
+        <point x="9.0" y="36.0"/>
+        <point x="9.0" y="3.0"/>
+      </arc>
+      <arc head="Inspect_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="r.RequiredInspection&lt;1&gt;"/>
+      <arc head="r.InspectionsGlobal" kind="OUTPUT" tail="Inspect_&lt;1&gt;_&lt;2&gt;"/>
+    </edges>
+  </gspn>
+  <gspn name="navigation_UGV" show-color-cmd="false" show-fluid-cmd="false">
+    <nodes>
+      <transition label-x="5.0" label-y="0.0" name="Go_&lt;1&gt;_&lt;2&gt;_UGV" rotation="4.71238898038469" type="IMM" weight="0" x="17.85" y="8.0"/>
+      <place label-y="-2.0" name="&lt;1&gt;_UGV" x="17.0" y="3.0"/>
+      <place label-x="7.0" label-y="-0.5" name="Navigating_&lt;1&gt;_&lt;2&gt;_UGV" x="17.0" y="13.0"/>
+      <transition label-x="7.5" label-y="0.0" name="Arrived_&lt;1&gt;_&lt;2&gt;_UGV" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="17.55" y="20.0"/>
+      <text-box bold="true" border-color="#000000" fill-color="none" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" text-size="LARGE" vert-pos="0" width="17.0" x="40.0" y="2.0">&lt;1&gt; : origin
+&lt;2&gt; : destination
+
+</text-box>
+      <place name="&lt;2&gt;_UGV" x="17.0" y="30.0"/>
+    </nodes>
+    <edges>
+      <arc head="Go_&lt;1&gt;_&lt;2&gt;_UGV" kind="INPUT" tail="&lt;1&gt;_UGV"/>
+      <arc head="Navigating_&lt;1&gt;_&lt;2&gt;_UGV" kind="OUTPUT" tail="Go_&lt;1&gt;_&lt;2&gt;_UGV"/>
+      <arc head="Arrived_&lt;1&gt;_&lt;2&gt;_UGV" kind="INPUT" tail="Navigating_&lt;1&gt;_&lt;2&gt;_UGV"/>
+      <arc head="&lt;2&gt;_UGV" kind="OUTPUT" tail="Arrived_&lt;1&gt;_&lt;2&gt;_UGV"/>
+    </edges>
+  </gspn>
+  <gspn name="new_charging" show-color-cmd="false" show-fluid-cmd="false" zoom="125">
+    <nodes>
+      <transition label-x="5.0" label-y="0.0" name="Charge_&lt;1&gt;_&lt;2&gt;" rotation="4.71238898038469" type="IMM" weight="0" weight-x="1.0" weight-y="1.5" x="34.85" y="8.0"/>
+      <place label-x="5.0" label-y="0.0" name="Charging_&lt;1&gt;_&lt;2&gt;" x="40.0" y="13.0"/>
+      <place label-x="3.0" label-y="0.0" name="&lt;1&gt;_&lt;3&gt;" x="40.0" y="26.0"/>
+      <place label-x="3.0" label-y="-0.5" name="&lt;1&gt;_&lt;2&gt;" x="40.0" y="3.0"/>
+      <place label-y="-2.0" marking="1" name="&lt;1&gt;_UGV" x="21.0" y="3.0"/>
+      <place label-x="-2.0" label-y="2.0" name="UGV_Charging_&lt;1&gt;" x="28.0" y="13.0"/>
+      <transition delay="0.005555556" delay-x="1.5" delay-y="0.0" label-x="7.0" label-y="1.0" name="FinishedCharging_&lt;1&gt;_&lt;2&gt;" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="34.55" y="20.0"/>
+      <text-box bold="true" border-color="#000000" fill-color="none" name="__textBox0" shadow="true" shape="ROUND_RECTANGLE" text-color="#000000" text-size="LARGE" vert-pos="0" width="17.0" x="45.5" y="1.0">&lt;1&gt; : panel
+&lt;2&gt; : battery level
+&lt;3&gt; : maximum battery level
+</text-box>
+      <place label-x="-4.5" label-y="0.0" name="&lt;1&gt;_UGV_Wait" x="21.0" y="13.0"/>
+      <transition label-x="-5.0" label-y="0.0" name="&lt;1&gt;_UGV_DWait" rotation="4.71238898038469" type="IMM" weight="0" weight-x="2.5" x="21.85" y="8.0"/>
+      <transition delay="1.00" label-x="-4.5" label-y="1.5" name="&lt;1&gt;_UGV_Finished_Waiting" nservers-x="0.5" rotation="1.5707963267948966" type="EXP" x="21.55" y="20.0"/>
+    </nodes>
+    <edges>
+      <arc head="Charging_&lt;1&gt;_&lt;2&gt;" kind="OUTPUT" tail="Charge_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="UGV_Charging_&lt;1&gt;" kind="OUTPUT" tail="Charge_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="FinishedCharging_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="UGV_Charging_&lt;1&gt;"/>
+      <arc head="&lt;1&gt;_UGV" kind="OUTPUT" tail="FinishedCharging_&lt;1&gt;_&lt;2&gt;">
+        <point x="29.0" y="27.0"/>
+        <point x="10.0" y="27.0"/>
+        <point x="10.0" y="4.0"/>
+      </arc>
+      <arc head="&lt;1&gt;_UGV_DWait" kind="INPUT" tail="&lt;1&gt;_UGV"/>
+      <arc head="&lt;1&gt;_UGV_Wait" kind="OUTPUT" tail="&lt;1&gt;_UGV_DWait"/>
+      <arc head="FinishedCharging_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="Charging_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="&lt;1&gt;_&lt;3&gt;" kind="OUTPUT" tail="FinishedCharging_&lt;1&gt;_&lt;2&gt;"/>
+      <arc head="&lt;1&gt;_UGV_Finished_Waiting" kind="INPUT" tail="&lt;1&gt;_UGV_Wait"/>
+      <arc head="&lt;1&gt;_UGV" kind="OUTPUT" mult-k="1.5803710937499997" tail="&lt;1&gt;_UGV_Finished_Waiting">
+        <point x="12.5" y="19.0"/>
+        <point x="12.5" y="6.0"/>
+      </arc>
+      <arc head="Charge_&lt;1&gt;_&lt;2&gt;" kind="INPUT" tail="&lt;1&gt;_UGV"/>
+    </edges>
+  </gspn>
+</project>
